@@ -6,7 +6,6 @@ const Error = () => {
                 <div className="page_404">
                     <div className="four_zero_four_bg">
                     </div>
-    
                     <div className="contant_box_404">
                         <p className="error_msg">Please enter a valid city name</p>
                         <p>The city name you entered is not found</p>

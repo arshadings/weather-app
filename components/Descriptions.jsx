@@ -1,6 +1,5 @@
 import React from 'react'
 import './descriptions.css';
-
 import { FaArrowUp, FaArrowDown, FaWind } from 'react-icons/fa';
 import { BiHappy } from 'react-icons/bi';
 import { MdCompress, MdOutlineWaterDrop } from 'react-icons/md';
@@ -57,18 +56,17 @@ const Descriptions = ({weather, units}) => {
 
   return (
     <div className="section section__descriptions">
-      { cards.map( ({id, icon, title, data, unit}) =>(
-        <div className="card" key={id}>
-          <div className="description__card-icon">
-            {icon}
-            <small>{title}</small>
+      { 
+        cards.map( ({id, icon, title, data, unit}) =>(
+          <div className="card" key={id}>
+            <div className="description__card-icon">
+              {icon}
+              <small>{title}</small>
+            </div>
+            <h2>{`${data} ${unit}`}</h2>
           </div>
-          <h2>{`${data} ${unit}`}</h2>
-        </div>
-      ) ) }
-      
-
-      
+        ) )
+      }
     </div>
   )
 }

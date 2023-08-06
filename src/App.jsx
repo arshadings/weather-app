@@ -7,7 +7,6 @@ import { getTimeZone } from './TimeZone';
 import Error from './Error';
 
 function App() {
-
   const [city, setCity] = useState('Paris')
   const [weather, setWeather] = useState({
     description: "description",
@@ -23,7 +22,7 @@ function App() {
     name: "name"
   });
   const [units, setUnits] = useState('metric');
-  const [bg, setBg] = useState(hotBg);
+  const [bg, setBg] = useState(coldBg);
   const [time, setTime] = useState("Fetching local time...")
 
   useEffect( () => {
@@ -43,8 +42,10 @@ function App() {
 
     const fetchTime = async() => {
       const time = await getTimeZone(city);
+      console.log(time)
       const formattedTime = time.datetime.toString().replace(/(:\d{2}| [AP]M)$/, "")
-      setTime(formattedTime);
+      console.log(formattedTime)
+      setTime(formattedTime+" "+time.timezone_abbreviation);
     };
     fetchTime();
 
@@ -53,7 +54,6 @@ function App() {
   const handleUnitsClick = (e) => {
     const button = e.currentTarget;
     const currentUnit = button.innerText.slice(1);
-
     const isCelsius = currentUnit === 'C';
     button.innerText = isCelsius ? '°F' : '°C';
     setUnits(isCelsius ? 'metric' : 'imperial')
@@ -68,18 +68,15 @@ function App() {
     }
   }
 
-  //const statusCode = `${weather.cod}`
-  //console.log("statusCode is: ", statusCode)
-
   return (
     <>
-        <div className="overlay">
-          {
-            (weather != null) ? (
-              <div className="app" style={{backgroundImage: `url(${bg})`}}>
+      <div className="overlay">
+        {
+          (weather != null) ? (
+            <div className="app" style={{backgroundImage: `url(${bg})`}}>
               <div className="container">
                 <div className="section section__inputs">
-                  <input className="icon" type="text" name="city" placeholder='Entery city...' onKeyDown={enterKeyPressed} />
+                  <input className="icon" type="text" name="city" placeholder='Enter city...' onKeyDown={enterKeyPressed} />
                   <button onClick={ (e) => handleUnitsClick(e) }>°F</button>
                 </div><br />
 
@@ -98,17 +95,13 @@ function App() {
                   </div>
                 </div>
 
-                {/* Cards */}
+                {/* Description Cards */}
                 <Descriptions weather={weather} units={units}/>
-              </div>
-              <div>
-                
               </div>
             </div>
               
           ) : <Error /> }
-        </div>
-      
+      </div>
     </>
   )
 }

@@ -1,4 +1,4 @@
-const TIME_ZONE_KEY = "3a53a4898100463f86d66dc21e25b14e";
+const TIME_ZONE_KEY = '3a53a4898100463f86d66dc21e25b14e';
 
 const getTimeZone = async(city) => { 
     const TIMEZONEURL = `https://timezone.abstractapi.com/v1/current_time/?api_key=${TIME_ZONE_KEY}&location=${city}`;
